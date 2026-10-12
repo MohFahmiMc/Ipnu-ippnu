@@ -37,24 +37,22 @@
             animation: float 4s ease-in-out infinite;
         }
         .glass-nav {
-            background: rgba(13, 92, 63, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(13, 92, 63, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
         }
         .glass-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(229, 231, 235, 0.8);
         }
-        /* Smooth Fade Animation for Page Switching */
         .fade-in {
-            animation: fadeIn 0.4s ease-in-out forwards;
+            animation: fadeIn 0.35s ease-in-out forwards;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -74,7 +72,7 @@
 
     <div>
         <!-- TOP BAR -->
-        <div class="bg-nuDarkGreen text-emerald-100 text-xs py-2 px-4 border-b border-emerald-900/50">
+        <div class="bg-nuDarkGreen text-emerald-100 text-xs py-2 px-4 border-b border-emerald-900/60">
             <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
                 <div class="flex items-center gap-3">
                     <span class="flex items-center gap-1 font-medium"><i class="fa-solid fa-school text-nuGold"></i> SMK NU Kaplongan</span>
@@ -93,12 +91,12 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-20">
                     <!-- Logos & Brand -->
-                    <div class="flex items-center gap-3 cursor-pointer" onclick="switchPage('beranda')">
+                    <div class="flex items-center gap-3 cursor-pointer group" onclick="switchPage('beranda')">
                         <div class="flex items-center -space-x-2">
                             <!-- Logo IPNU -->
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/LOGO_IPNU_RESMI_KONGRES_2018.png" alt="Logo IPNU" class="w-11 h-11 object-contain drop-shadow-md bg-white/90 rounded-full p-0.5 border border-nuGold">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/LOGO_IPNU_RESMI_KONGRES_2018.png" alt="Logo IPNU" class="w-11 h-11 object-contain drop-shadow-md bg-white/90 rounded-full p-0.5 border border-nuGold group-hover:scale-105 transition">
                             <!-- Logo IPPNU -->
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6XwTQOY1YpAKdxl0622Qu4zMuG9XyRkUkBOqBSKW-jYOltgPjpqryAUAijZ2bYUNwOUyRNBMlgdx96_VE33_7ARkVPEX-1HUApMdueRXd0d8ppOriaXCQVqxX1VNGIMtzXr3Y_vUBm2Q/s1280/LOGO+RESMI+IPPNU.png" alt="Logo IPPNU" class="w-11 h-11 object-contain drop-shadow-md bg-white/90 rounded-full p-0.5 border border-nuGold">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6XwTQOY1YpAKdxl0622Qu4zMuG9XyRkUkBOqBSKW-jYOltgPjpqryAUAijZ2bYUNwOUyRNBMlgdx96_VE33_7ARkVPEX-1HUApMdueRXd0d8ppOriaXCQVqxX1VNGIMtzXr3Y_vUBm2Q/s1280/LOGO+RESMI+IPPNU.png" alt="Logo IPPNU" class="w-11 h-11 object-contain drop-shadow-md bg-white/90 rounded-full p-0.5 border border-nuGold group-hover:scale-105 transition">
                         </div>
                         <div>
                             <span class="text-white font-bold text-base sm:text-lg tracking-tight block leading-tight">PK IPNU - IPPNU</span>
@@ -107,8 +105,8 @@
                     </div>
 
                     <!-- Desktop Nav Links -->
-                    <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
-                        <button onclick="switchPage('beranda')" id="nav-beranda" class="nav-btn text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition active-nav bg-emerald-800/60">Beranda</button>
+                    <nav class="hidden md:flex items-center space-x-1">
+                        <button onclick="switchPage('beranda')" id="nav-beranda" class="nav-btn text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition bg-emerald-800/60">Beranda</button>
                         <button onclick="switchPage('sejarah')" id="nav-sejarah" class="nav-btn text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition">Sejarah & Profil</button>
                         <button onclick="switchPage('visi-misi')" id="nav-visi-misi" class="nav-btn text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition">Visi & Misi</button>
                         <button onclick="switchPage('kesiswaan')" id="nav-kesiswaan" class="nav-btn text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition">Kesiswaan</button>
@@ -172,7 +170,7 @@
                                 </div>
                                 <div class="pt-6 grid grid-cols-3 gap-4 border-t border-emerald-800/60 max-w-md mx-auto lg:mx-0">
                                     <div>
-                                        <div class="text-2xl sm:text-3xl font-extrabold text-nuGold">39+</div>
+                                        <div class="text-2xl sm:text-3xl font-extrabold text-nuGold">37+</div>
                                         <div class="text-xs text-emerald-200">Kader Aktif</div>
                                     </div>
                                     <div>
@@ -594,19 +592,78 @@
         </main>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="bg-nuDarkGreen text-emerald-200 py-10 border-t border-emerald-900 mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-            <div class="flex items-center gap-3 justify-center cursor-pointer" onclick="switchPage('beranda')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/LOGO_IPNU_RESMI_KONGRES_2018.png" alt="IPNU" class="w-9 h-9 object-contain bg-white/90 rounded-full p-0.5">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6XwTQOY1YpAKdxl0622Qu4zMuG9XyRkUkBOqBSKW-jYOltgPjpqryAUAijZ2bYUNwOUyRNBMlgdx96_VE33_7ARkVPEX-1HUApMdueRXd0d8ppOriaXCQVqxX1VNGIMtzXr3Y_vUBm2Q/s1280/LOGO+RESMI+IPPNU.png" alt="IPPNU" class="w-9 h-9 object-contain bg-white/90 rounded-full p-0.5">
+    <!-- MULTI-COLUMN RICH FOOTER -->
+    <footer class="bg-nuDarkGreen text-emerald-100 pt-16 pb-10 border-t border-emerald-900 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                <!-- Col 1: Brand & Logos -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3 cursor-pointer" onclick="switchPage('beranda')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/LOGO_IPNU_RESMI_KONGRES_2018.png" alt="IPNU" class="w-10 h-10 object-contain bg-white/90 rounded-full p-0.5">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6XwTQOY1YpAKdxl0622Qu4zMuG9XyRkUkBOqBSKW-jYOltgPjpqryAUAijZ2bYUNwOUyRNBMlgdx96_VE33_7ARkVPEX-1HUApMdueRXd0d8ppOriaXCQVqxX1VNGIMtzXr3Y_vUBm2Q/s1280/LOGO+RESMI+IPPNU.png" alt="IPPNU" class="w-10 h-10 object-contain bg-white/90 rounded-full p-0.5">
+                        <div>
+                            <div class="text-white font-bold text-sm">PK IPNU & IPPNU</div>
+                            <div class="text-xs text-nuGold">SMK NU Kaplongan</div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-emerald-300 leading-relaxed">
+                        Wadah resmi pengkaderan pelajar Nahdlatul Ulama di SMK NU Kaplongan yang berlandaskan prinsip Belajar, Berjuang, Bertakwa.
+                    </p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="#" class="w-8 h-8 rounded-full bg-emerald-900 border border-emerald-700 flex items-center justify-center text-nuGold hover:bg-nuGold hover:text-slate-900 transition"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-emerald-900 border border-emerald-700 flex items-center justify-center text-nuGold hover:bg-nuGold hover:text-slate-900 transition"><i class="fa-brands fa-instagram text-xs"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-emerald-900 border border-emerald-700 flex items-center justify-center text-nuGold hover:bg-nuGold hover:text-slate-900 transition"><i class="fa-brands fa-youtube text-xs"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigasi Cepat -->
                 <div>
-                    <div class="text-white font-bold text-sm">PK IPNU & IPPNU SMK NU Kaplongan</div>
-                    <div class="text-xs text-nuGold">Belajar, Berjuang, Bertakwa</div>
+                    <h4 class="text-white font-bold text-sm mb-4 border-b border-emerald-800 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-compass text-nuGold"></i> Tautan Cepat
+                    </h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><button onclick="switchPage('beranda')" class="hover:text-nuGold transition">Beranda Utama</button></li>
+                        <li><button onclick="switchPage('sejarah')" class="hover:text-nuGold transition">Sejarah & Profil</button></li>
+                        <li><button onclick="switchPage('visi-misi')" class="hover:text-nuGold transition">Visi & Misi Organisasi</button></li>
+                        <li><button onclick="switchPage('kesiswaan')" class="hover:text-nuGold transition">Sinergi Kesiswaan</button></li>
+                        <li><button onclick="switchPage('proker')" class="hover:text-nuGold transition">Program Kerja</button></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Direktori & Anggota -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4 border-b border-emerald-800 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-users text-nuGold"></i> Direktori & Kader
+                    </h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><button onclick="switchPage('anggota'); filterClass('X');" class="hover:text-nuGold transition">Anggota Kelas X</button></li>
+                        <li><button onclick="switchPage('anggota'); filterClass('XI');" class="hover:text-nuGold transition">Anggota Kelas XI</button></li>
+                        <li><button onclick="switchPage('anggota'); filterClass('XII');" class="hover:text-nuGold transition">Anggota Kelas XII</button></li>
+                        <li><button onclick="switchPage('galeri')" class="hover:text-nuGold transition">Galeri Kegiatan</button></li>
+                        <li><button onclick="switchPage('kontak')" class="hover:text-nuGold transition">Kirim Aspirasi Siswa</button></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Sekretariat & Info -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4 border-b border-emerald-800 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-nuGold"></i> Sekretariat
+                    </h4>
+                    <div class="space-y-2.5 text-xs text-emerald-300">
+                        <p><strong class="text-white">SMK NU Kaplongan</strong><br>Jl. Raya Kaplongan, Karangampel, Indramayu, Jawa Barat</p>
+                        <p><strong class="text-white">Koordinasi:</strong><br>Bidang Kesiswaan & Pembina Komisariat</p>
+                    </div>
                 </div>
             </div>
-            <div class="text-xs text-emerald-300">
-                &copy; 2026 PK IPNU & IPPNU SMK NU Kaplongan. All rights reserved.
+
+            <!-- Bottom Copyright Bar -->
+            <div class="pt-8 border-t border-emerald-900/80 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-emerald-300">
+                <div>
+                    &copy; 2026 PK IPNU & IPPNU SMK NU Kaplongan. All rights reserved.
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="text-nuGold font-medium">Belajar, Berjuang, Bertakwa</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -615,18 +672,15 @@
     <script>
         // Page Router Functionality ("Beda Halaman Tanpa Numpuk")
         function switchPage(pageId) {
-            // Hide all pages
             document.querySelectorAll('.page-view').forEach(page => {
                 page.classList.add('hidden');
             });
 
-            // Show target page
             const target = document.getElementById(`page-${pageId}`);
             if (target) {
                 target.classList.remove('hidden');
             }
 
-            // Update desktop active navbar styles
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.classList.remove('bg-emerald-800/60', 'text-nuGold');
             });
@@ -635,7 +689,6 @@
                 activeNav.classList.add('bg-emerald-800/60', 'text-nuGold');
             }
 
-            // Scroll to top smoothly
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -649,7 +702,7 @@
 
         mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
-        // Members Dataset
+        // Members Dataset (37 Kader Lengkap)
         const members = [
             // KELAS X
             { name: "Muhammad Ridwan Na'ali", classGroup: "X", major: "X TJKT 3" },
