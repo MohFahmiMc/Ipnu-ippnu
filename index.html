@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -28,56 +29,58 @@
     <style>
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-6px); }
         }
         .animate-float { animation: float 4s ease-in-out infinite; }
-
         .glass-nav {
-            background: rgba(13, 92, 63, 0.94);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
-
         .mobile-menu {
-            transition: max-height 0.28s ease, opacity 0.22s ease;
+            transition: max-height 0.3s ease, opacity 0.25s ease;
             overflow: hidden;
             max-height: 0;
             opacity: 0;
         }
-
         .mobile-menu.open {
-            max-height: 520px;
+            max-height: 600px;
             opacity: 1;
         }
-
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #0d5c3f; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans antialiased transition-colors duration-300 overflow-x-hidden">
 
-    <div class="bg-nuDarkGreen text-emerald-100 text-xs py-2 px-3 sm:px-6 border-b border-emerald-900/60">
+    <!-- Top Utility Bar -->
+    <div class="bg-nuDarkGreen text-emerald-100 text-xs py-2 px-4 sm:px-8 border-b border-emerald-900/60">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
-            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3">
-                <span class="flex items-center gap-1 font-medium"><i class="fa-solid fa-school text-nuGold"></i> SMK NU Kaplongan</span>
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3">
+                <span class="flex items-center gap-1.5 font-medium"><i class="fa-solid fa-school text-nuGold"></i> SMK NU Kaplongan</span>
                 <span class="hidden sm:inline text-emerald-600">|</span>
-                <span class="flex items-center gap-1"><i class="fa-solid fa-location-dot text-nuGold"></i> Indramayu, Jabar</span>
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-nuGold"></i> Indramayu, Jawa Barat</span>
             </div>
-            <div class="flex items-center gap-4 text-[11px] sm:text-xs">
-                <a href="#anggota" class="hover:text-nuGold transition flex items-center gap-1"><i class="fa-solid fa-users"></i> Anggota</a>
-                <a href="#kontak" class="hover:text-nuGold transition flex items-center gap-1"><i class="fa-solid fa-phone"></i> Kontak</a>
+            <div class="flex items-center gap-4">
+                <button onclick="openRegistrationModal()" class="text-nuGold hover:underline font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-user-plus"></i> Daftar Anggota Baru
+                </button>
+                <button id="theme-toggle" aria-label="Ganti Tema" class="text-emerald-200 hover:text-nuGold transition p-1">
+                    <i class="fa-solid fa-moon dark:hidden text-base"></i>
+                    <i class="fa-solid fa-sun hidden dark:inline text-nuGold text-base"></i>
+                </button>
             </div>
         </div>
     </div>
 
-    <header class="sticky top-0 z-50 glass-nav shadow-lg">
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 glass-nav bg-nuGreen/95 dark:bg-slate-900/95 border-b border-emerald-800 dark:border-slate-800 shadow-md transition-colors">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <a href="#beranda" class="flex items-center gap-3 group min-w-0">
                     <div class="flex items-center -space-x-2 shrink-0">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/LOGO_IPNU_RESMI_KONGRES_2018.png" alt="Logo IPNU" class="w-10 h-10 sm:w-11 sm:h-11 object-contain bg-white rounded-full p-1 ring-2 ring-white/10">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/LOGO_IPNU_RESMI_KONGRES_2018.png" alt="Logo IPPNU" class="w-9 h-9 sm:w-10 sm:h-10 object-contain bg-white rounded-full p-1 ring-2 ring-white/10">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/LOGO_IPNU_RESMI_KONGRES_2018.png" alt="Logo IPNU" class="w-10 h-10 sm:w-11 sm:h-11 object-contain bg-white rounded-full p-1 ring-2 ring-white/20">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/LOGO_IPNU_RESMI_KONGRES_2018.png" alt="Logo IPPNU" class="w-9 h-9 sm:w-10 sm:h-10 object-contain bg-white rounded-full p-1 ring-2 ring-white/20">
                     </div>
                     <div class="min-w-0">
                         <span class="text-white font-bold text-sm sm:text-base tracking-tight block leading-tight">PK IPNU & IPPNU</span>
@@ -88,9 +91,9 @@
                 <nav class="hidden lg:flex items-center space-x-1">
                     <a href="#beranda" class="text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition">Beranda</a>
                     <a href="#sejarah" class="text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition">Sejarah</a>
-                    <a href="#visi-misi" class="text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition">Visi Misi</a>
+                    <a href="#struktur" class="text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition">Struktur</a>
                     <a href="#kesiswaan" class="text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition">Kesiswaan</a>
-                    <a href="#proker" class="text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition">Proker</a>
+                    <a href="#agenda" class="text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition">Agenda</a>
                     <a href="#anggota" class="text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition">Anggota</a>
                     <a href="#galeri" class="text-white hover:text-nuGold px-3 py-2 rounded-lg text-sm font-medium transition">Galeri</a>
                     <a href="#kontak" class="bg-nuGold hover:bg-amber-500 text-slate-900 font-bold px-4 py-2 rounded-full text-sm shadow-md transition transform hover:scale-105 ml-2">Kontak</a>
@@ -104,50 +107,52 @@
             </div>
         </div>
 
-        <div id="mobile-menu" class="mobile-menu lg:hidden bg-nuDarkGreen/98 border-t border-emerald-800 px-4 pt-3 pb-5 shadow-2xl">
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu lg:hidden bg-nuDarkGreen dark:bg-slate-900 border-t border-emerald-800 dark:border-slate-800 px-4 pt-3 pb-5 shadow-2xl">
             <div class="flex items-center justify-between mb-3">
-                <div class="text-white font-semibold text-sm uppercase tracking-[0.18em]">Menu</div>
+                <div class="text-white font-semibold text-xs uppercase tracking-[0.18em]">Menu Utama</div>
                 <button id="mobile-menu-close" class="text-white p-2 rounded-lg hover:bg-white/5" aria-label="Tutup menu"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <nav class="space-y-2">
-                <a href="#beranda" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 px-3 py-2.5 rounded-xl text-base font-medium transition">Beranda</a>
-                <a href="#sejarah" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 px-3 py-2.5 rounded-xl text-base font-medium transition">Sejarah & Profil</a>
-                <a href="#visi-misi" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 px-3 py-2.5 rounded-xl text-base font-medium transition">Visi & Misi</a>
-                <a href="#kesiswaan" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 px-3 py-2.5 rounded-xl text-base font-medium transition">Sinergi Kesiswaan</a>
-                <a href="#proker" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 px-3 py-2.5 rounded-xl text-base font-medium transition">Program Kerja</a>
-                <a href="#anggota" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 px-3 py-2.5 rounded-xl text-base font-medium transition">Daftar Anggota</a>
-                <a href="#galeri" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 px-3 py-2.5 rounded-xl text-base font-medium transition">Galeri Foto</a>
+                <a href="#beranda" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 dark:hover:bg-slate-800 px-3 py-2.5 rounded-xl text-base font-medium transition">Beranda</a>
+                <a href="#sejarah" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 dark:hover:bg-slate-800 px-3 py-2.5 rounded-xl text-base font-medium transition">Sejarah & Profil</a>
+                <a href="#struktur" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 dark:hover:bg-slate-800 px-3 py-2.5 rounded-xl text-base font-medium transition">Struktur Organisasi</a>
+                <a href="#kesiswaan" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 dark:hover:bg-slate-800 px-3 py-2.5 rounded-xl text-base font-medium transition">Sinergi Kesiswaan</a>
+                <a href="#agenda" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 dark:hover:bg-slate-800 px-3 py-2.5 rounded-xl text-base font-medium transition">Agenda & Kegiatan</a>
+                <a href="#anggota" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 dark:hover:bg-slate-800 px-3 py-2.5 rounded-xl text-base font-medium transition">Direktori Anggota</a>
+                <a href="#galeri" class="mobile-link block text-white hover:text-nuGold hover:bg-emerald-800/55 dark:hover:bg-slate-800 px-3 py-2.5 rounded-xl text-base font-medium transition">Galeri Foto</a>
                 <a href="#kontak" class="mobile-link block bg-nuGold text-slate-900 text-center font-bold px-4 py-3 rounded-xl shadow mt-2">Hubungi Kami</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section id="beranda" class="relative bg-gradient-to-br from-nuDarkGreen via-nuGreen to-emerald-900 text-white py-16 sm:py-24 lg:py-36 overflow-hidden">
+        <!-- Hero Section -->
+        <section id="beranda" class="relative bg-gradient-to-br from-nuDarkGreen via-nuGreen to-emerald-900 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950 text-white py-16 sm:py-24 lg:py-32 overflow-hidden">
             <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]"></div>
             <div class="absolute -right-20 -bottom-20 w-80 h-80 sm:w-96 sm:h-96 bg-nuGold/20 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                     <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                        <div class="inline-flex items-center gap-2 bg-emerald-800/80 border border-emerald-600 text-nuGold px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
+                        <div class="inline-flex items-center gap-2 bg-emerald-800/80 dark:bg-emerald-950/80 border border-emerald-600 text-nuGold px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
                             <i class="fa-solid fa-star text-nuGold"></i> Pimpinan Komisariat IPNU & IPPNU SMK NU Kaplongan
                         </div>
                         <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-                            Pelajar <span class="text-nuGold underline decoration-wavy decoration-2">Berakhlak</span>, Cerdas & Berkarya
+                            Pelajar Berakhlak, <span class="text-nuGold">Cerdas & Berkarya</span>
                         </h1>
                         <p class="text-emerald-100 text-sm sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-                            Wadah pengembangan potensi kader pelajar Nahdlatul Ulama di SMK NU Kaplongan yang aktif bersinergi dengan bidang kesiswaan dalam membina kedisiplinan, keagamaan, dan prestasi.
+                            Wadah resmi pengembangan potensi kader pelajar Nahdlatul Ulama di SMK NU Kaplongan yang aktif bersinergi dengan bidang kesiswaan dalam membina kedisiplinan dan keagamaan.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start pt-2">
                             <a href="#anggota" class="bg-nuGold hover:bg-amber-500 text-slate-900 font-bold px-7 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-users-viewfinder"></i> Lihat Data Anggota
                             </a>
-                            <a href="#sejarah" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-7 py-3.5 rounded-xl backdrop-blur-sm transition flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-book-open"></i> Sejarah & Profil
-                            </a>
+                            <button onclick="openRegistrationModal()" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-7 py-3.5 rounded-xl backdrop-blur-sm transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-user-pen"></i> Pendaftaran Kader
+                            </button>
                         </div>
-                        <div class="pt-6 grid grid-cols-3 gap-4 border-t border-emerald-800/60 max-w-md mx-auto lg:mx-0">
+                        <div class="pt-6 grid grid-cols-3 gap-4 border-t border-emerald-800/60 dark:border-slate-800 max-w-md mx-auto lg:mx-0">
                             <div>
                                 <div class="text-2xl sm:text-3xl font-extrabold text-nuGold">37+</div>
                                 <div class="text-[11px] sm:text-xs text-emerald-200">Kader Aktif</div>
@@ -158,7 +163,7 @@
                             </div>
                             <div>
                                 <div class="text-2xl sm:text-3xl font-extrabold text-nuGold">100%</div>
-                                <div class="text-[11px] sm:text-xs text-emerald-200">Solid & Disiplin</div>
+                                <div class="text-[11px] sm:text-xs text-emerald-200">Disiplin & Solid</div>
                             </div>
                         </div>
                     </div>
@@ -166,7 +171,7 @@
                     <div class="lg:col-span-5 flex justify-center">
                         <div class="relative w-full max-w-sm sm:max-w-md">
                             <div class="absolute -inset-2 bg-gradient-to-r from-nuGold to-emerald-400 rounded-3xl blur-lg opacity-30 animate-pulse"></div>
-                            <div class="relative bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-3xl shadow-2xl text-center space-y-6 animate-float">
+                            <div class="relative bg-white/10 dark:bg-slate-900/80 backdrop-blur-xl border border-white/20 dark:border-slate-700 p-6 rounded-3xl shadow-2xl text-center space-y-6 animate-float">
                                 <div class="flex justify-center items-center gap-4 py-2">
                                     <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/LOGO_IPNU_RESMI_KONGRES_2018.png" alt="IPNU" class="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow">
                                     <div class="text-nuGold font-bold text-2xl">×</div>
@@ -176,8 +181,8 @@
                                     <h2 class="text-lg sm:text-xl font-bold text-white">PK IPNU & IPPNU</h2>
                                     <p class="text-nuGold text-xs sm:text-sm font-medium">SMK NU Kaplongan</p>
                                 </div>
-                                <p class="text-xs text-emerald-100 bg-emerald-950/50 p-3 rounded-xl border border-emerald-800">
-                                    "Belajar, Berjuang, Bertakwa" — Siap mewujudkan pelajar yang disiplin, religius, dan siap kerja!
+                                <p class="text-xs text-emerald-100 bg-emerald-950/50 dark:bg-slate-800/80 p-3 rounded-xl border border-emerald-800 dark:border-slate-700">
+                                    Prinsip Utama: Belajar, Berjuang, Bertakwa — Siap mencetak generasi vokasi yang religius dan profesional!
                                 </p>
                             </div>
                         </div>
@@ -186,127 +191,117 @@
             </div>
         </section>
 
-        <section id="sejarah" class="py-16 bg-white">
+        <!-- Sejarah Section -->
+        <section id="sejarah" class="py-16 bg-white dark:bg-slate-900 transition-colors">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
                 <div class="text-center max-w-3xl mx-auto">
-                    <span class="text-nuGreen font-bold text-sm tracking-wider uppercase bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">Sejarah & Profil</span>
-                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mt-3">Jejak Langkah & Perjalanan PK IPNU-IPPNU</h2>
+                    <span class="text-nuGreen dark:text-emerald-400 font-bold text-sm tracking-wider uppercase bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">Sejarah & Profil</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3">Jejak Langkah & Perjalanan Organisasi</h2>
                     <div class="w-20 h-1.5 bg-nuGold mx-auto mt-4 rounded-full"></div>
                 </div>
 
-                <div class="space-y-6 text-slate-700 text-sm sm:text-base leading-relaxed">
-                    <div class="bg-slate-50 border-l-4 border-nuGreen p-6 rounded-r-2xl shadow-sm">
-                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2"><i class="fa-solid fa-history text-nuGreen mr-2"></i> Asal-Usul Berdirinya IPNU & IPPNU</h3>
+                <div class="space-y-6 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                    <div class="bg-slate-50 dark:bg-slate-800 border-l-4 border-nuGreen p-6 rounded-r-2xl shadow-sm">
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2"><i class="fa-solid fa-history text-nuGreen mr-2"></i> Asal-Usul Berdirinya IPNU & IPPNU</h3>
                         <p>
-                            Ikatan Pelajar Nahdlatul Ulama (IPNU) didirikan pada 24 Februari 1954 di Semarang, Jawa Tengah. Menyusul kesuksesan tersebut, wadah khusus pelajar putri yaitu Ikatan Pelajar Putri Nahdlatul Ulama (IPPNU) juga tumbuh dan berkembang sebagai organisasi terpisah yang sama-sama berlandaskan Ahlussunnah wal Jamaah.
+                            Ikatan Pelajar Nahdlatul Ulama (IPNU) didirikan pada tanggal 24 Februari 1954 di Semarang. Diikuti oleh Ikatan Pelajar Putri Nahdlatul Ulama (IPPNU) sebagai wadah khusus pelajar putri untuk bersama-sama menegakkan ajaran Islam Ahlussunnah wal Jamaah di lingkungan pendidikan.
                         </p>
                     </div>
 
-                    <div class="bg-emerald-50/50 border-l-4 border-nuGold p-6 rounded-r-2xl shadow-sm">
-                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2"><i class="fa-solid fa-school text-amber-600 mr-2"></i> Komisariat SMK NU Kaplongan</h3>
+                    <div class="bg-emerald-50/50 dark:bg-emerald-950/30 border-l-4 border-nuGold p-6 rounded-r-2xl shadow-sm">
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2"><i class="fa-solid fa-school text-amber-600 mr-2"></i> Komisariat SMK NU Kaplongan</h3>
                         <p>
-                            Di lingkungan <strong>SMK NU Kaplongan, Indramayu</strong>, Pimpinan Komisariat (PK) IPNU & IPPNU hadir sebagai wadah resmi pengkaderan di bawah naungan Ma'arif NU. Komisariat bertugas membina siswa dalam aspek religius, disiplin, dan keterampilan vokasi.
+                            Di lingkungan <strong>SMK NU Kaplongan, Indramayu</strong>, Pimpinan Komisariat (PK) aktif membina siswa dalam aspek religius, kepemimpinan, dan kedisiplinan sekolah berkat kolaborasi erat dengan bidang kesiswaan.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="visi-misi" class="py-16 bg-slate-100">
+        <!-- Struktur Organisasi Section (NEW FEATURE) -->
+        <section id="struktur" class="py-16 bg-slate-100 dark:bg-slate-950 transition-colors">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
                 <div class="text-center max-w-3xl mx-auto">
-                    <span class="text-nuGreen font-bold text-sm tracking-wider uppercase bg-white px-3 py-1 rounded-full border border-emerald-200 shadow-sm">Landasan Organisasi</span>
-                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mt-3">Visi, Misi & Prinsip 3B</h2>
+                    <span class="text-nuGreen dark:text-emerald-400 font-bold text-sm tracking-wider uppercase bg-white dark:bg-slate-900 px-3 py-1 rounded-full border border-emerald-200 dark:border-slate-800 shadow-sm">Bagan Kepengurusan</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3">Pimpinan Komisariat PK IPNU & IPPNU</h2>
                     <div class="w-20 h-1.5 bg-nuGold mx-auto mt-4 rounded-full"></div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-gradient-to-br from-nuDarkGreen to-nuGreen p-8 rounded-3xl text-white shadow-xl flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-nuGold text-xl mb-6">
-                                <i class="fa-solid fa-bullseye"></i>
-                            </div>
-                            <h3 class="text-xl sm:text-2xl font-bold mb-4">Visi Utama</h3>
-                            <p class="text-emerald-100 text-sm sm:text-base leading-relaxed">
-                                "Terbentuknya pelajar bangsa yang bertaqwa kepada Allah SWT, berilmu pengetahuan, berakhlak mulia, terampil, serta bertanggung jawab atas tegaknya ajaran Islam Ahlussunnah wal Jamaah."
-                            </p>
-                        </div>
-                        <div class="mt-8 pt-6 border-t border-emerald-600/55 text-xs text-nuGold font-semibold">
-                            SMK NU KAPLONGAN • BERKUALITAS & RELIGIUS
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm text-center space-y-3">
+                        <div class="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/50 text-nuGreen dark:text-emerald-400 rounded-full flex items-center justify-center text-2xl mx-auto"><i class="fa-solid fa-user-tie"></i></div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-base">Ketua IPNU</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Pimpinan Harian IPNU</p>
+                        <span class="inline-block px-3 py-1 bg-emerald-50 dark:bg-emerald-950 text-nuGreen dark:text-emerald-400 text-xs font-semibold rounded-full">Kelas XI / XII</span>
                     </div>
 
-                    <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200 flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-xl mb-6">
-                                <i class="fa-solid fa-list-check"></i>
-                            </div>
-                            <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mb-4">Misi Organisasi</h3>
-                            <ul class="space-y-3 text-slate-600 text-sm">
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-check text-nuGreen mt-1"></i>
-                                    <span>Menyelenggarakan kaderisasi berjenjang yang sistematis bagi pelajar SMK NU Kaplongan.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-check text-nuGreen mt-1"></i>
-                                    <span>Menjalin kemitraan erat dengan bidang kesiswaan dalam pembinaan kedisiplinan dan keagamaan.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <i class="fa-solid fa-check text-nuGreen mt-1"></i>
-                                    <span>Mengembangkan potensi minat bakat kader di bidang akademik, vokasi, dan seni budaya Islami.</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="mt-8 pt-6 border-t border-slate-200 text-xs text-slate-400 font-semibold">
-                            PRINSIP UTAMA: Belajar, Berjuang, Bertakwa
-                        </div>
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm text-center space-y-3">
+                        <div class="w-16 h-16 bg-amber-100 dark:bg-amber-900/50 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto"><i class="fa-solid fa-user-tie"></i></div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-base">Ketua IPPNU</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Pimpinan Harian IPPNU</p>
+                        <span class="inline-block px-3 py-1 bg-amber-50 dark:bg-amber-950 text-amber-600 text-xs font-semibold rounded-full">Kelas XI / XII</span>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm text-center space-y-3">
+                        <div class="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/50 text-nuGreen dark:text-emerald-400 rounded-full flex items-center justify-center text-2xl mx-auto"><i class="fa-solid fa-file-pen"></i></div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-base">Sekretariat</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Administrasi & Surat Menyurat</p>
+                        <span class="inline-block px-3 py-1 bg-emerald-50 dark:bg-emerald-950 text-nuGreen dark:text-emerald-400 text-xs font-semibold rounded-full">Pengurus PK</span>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm text-center space-y-3">
+                        <div class="w-16 h-16 bg-amber-100 dark:bg-amber-900/50 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto"><i class="fa-solid fa-wallet"></i></div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-base">Bendahara</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Keuangan & Kas Organisasi</p>
+                        <span class="inline-block px-3 py-1 bg-amber-50 dark:bg-amber-950 text-amber-600 text-xs font-semibold rounded-full">Pengurus PK</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="kesiswaan" class="py-16 bg-white">
+        <!-- Sinergi Kesiswaan Section -->
+        <section id="kesiswaan" class="py-16 bg-white dark:bg-slate-900 transition-colors">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                     <div class="lg:col-span-6 space-y-6">
-                        <span class="text-nuGreen font-bold text-sm tracking-wider uppercase bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 shadow-sm">Kolaborasi Khusus</span>
-                        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900">
-                            Sistem Kemitraan: <span class="text-nuGreen">Mirip OSIS, Tapi Lebih Spesifik!</span>
+                        <span class="text-nuGreen dark:text-emerald-400 font-bold text-sm tracking-wider uppercase bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800 shadow-sm">Kolaborasi Khusus</span>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+                            Sinergi Kesiswaan: <span class="text-nuGreen dark:text-emerald-400">Lebih Spesifik & Religius!</span>
                         </h2>
-                        <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
-                            Meskipun memiliki struktur kepengurusan mandiri layaknya OSIS, PK IPNU & IPPNU SMK NU Kaplongan memiliki fokus khusus yang langsung berkolaborasi dengan bidang kesiswaan dalam pembinaan siswa.
+                        <p class="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                            Meskipun memiliki struktur kepengurusan mandiri layaknya OSIS, PK IPNU & IPPNU SMK NU Kaplongan fokus langsung pada pembinaan mental spiritual, kedisiplinan, dan amaliyah keagamaan bersama guru kesiswaan.
                         </p>
                         <div class="space-y-4">
-                            <div class="flex items-start gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <div class="flex items-start gap-4 bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
                                 <div class="w-10 h-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
                                     <i class="fa-solid fa-mosque"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">Pembinaan Keagamaan & Ketertiban</h4>
-                                    <p class="text-xs sm:text-sm text-slate-600">Membantu kesiswaan mengkoordinasikan kegiatan keagamaan rutin serta penegakan tata tertib sekolah.</p>
+                                    <h4 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">Pembinaan Keagamaan Rutin</h4>
+                                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Mengoordinasikan kegiatan sholawat, tahlil, dan pengajian rutin mingguan.</p>
                                 </div>
                             </div>
 
-                            <div class="flex items-start gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <div class="flex items-start gap-4 bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
                                 <div class="w-10 h-10 rounded-lg bg-amber-500 text-slate-900 flex items-center justify-center shrink-0 font-bold">
-                                    <i class="fa-solid fa-hands-holding-child"></i>
+                                    <i class="fa-solid fa-user-shield"></i>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">Pendampingan & Aspirasi Siswa</h4>
-                                    <p class="text-xs sm:text-sm text-slate-600">Menjadi jembatan komunikasi antara siswa dengan guru kesiswaan dalam menyampaikan aspirasi positif.</p>
+                                    <h4 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">Penegakan Disiplin Sekolah</h4>
+                                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Membantu kesiswaan memantau ketertiban upacara dan apel pagi.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="lg:col-span-6">
-                        <div class="bg-gradient-to-br from-nuDarkGreen to-nuGreen p-8 sm:p-10 rounded-3xl text-white shadow-2xl relative">
+                        <div class="bg-gradient-to-br from-nuDarkGreen to-nuGreen dark:from-slate-950 dark:to-emerald-950 p-8 sm:p-10 rounded-3xl text-white shadow-2xl relative">
                             <div class="absolute top-4 right-4 text-nuGold/20 text-6xl font-black">NU</div>
-                            <h3 class="text-xl sm:text-2xl font-bold mb-4">Kenapa Berbeda dari OSIS?</h3>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-4">Keunggulan Komisariat</h3>
                             <ul class="space-y-3.5 text-emerald-100 text-xs sm:text-sm">
                                 <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-nuGold"></i><span>Berlandaskan nilai Ahlussunnah wal Jamaah An-Nahdliyah.</span></li>
-                                <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-nuGold"></i><span>Terhubung langsung dengan jaringan pengkaderan pelajar NU Cabang.</span></li>
-                                <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-nuGold"></i><span>Fokus penguatan mental spiritual sekaligus kecakapan vokasi kejuruan.</span></li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-nuGold"></i><span>Terhubung langsung dengan jaringan pengkaderan Pimpinan Cabang.</span></li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-nuGold"></i><span>Menyeimbangkan kompetensi kejuruan teknik dengan akhlak karimah.</span></li>
                             </ul>
                         </div>
                     </div>
@@ -314,62 +309,67 @@
             </div>
         </section>
 
-        <section id="proker" class="py-16 bg-slate-100">
+        <!-- Agenda & Kegiatan Section (NEW FEATURE) -->
+        <section id="agenda" class="py-16 bg-slate-100 dark:bg-slate-950 transition-colors">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-12">
-                    <span class="text-nuGreen font-bold text-sm tracking-wider uppercase bg-white px-3 py-1 rounded-full border border-emerald-200 shadow-sm">Agenda & Kegiatan</span>
-                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mt-3">Program Kerja Utama</h2>
+                    <span class="text-nuGreen dark:text-emerald-400 font-bold text-sm tracking-wider uppercase bg-white dark:bg-slate-900 px-3 py-1 rounded-full border border-emerald-200 dark:border-slate-800 shadow-sm">Kalender Kegiatan</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3">Agenda & Program Kerja</h2>
                     <div class="w-20 h-1.5 bg-nuGold mx-auto mt-4 rounded-full"></div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-lg transition group">
-                        <div class="w-12 h-12 bg-emerald-100 text-nuGreen rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-nuGreen group-hover:text-white transition"><i class="fa-solid fa-book-quran"></i></div>
-                        <h3 class="font-bold text-slate-900 text-lg mb-2">Kajian Aswaja & Diba'an</h3>
-                        <p class="text-slate-600 text-sm">Rutin mingguan pembacaan sholawat, tahlil, dan pengenalan amaliyah Ahlussunnah wal Jamaah.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-950 text-nuGreen dark:text-emerald-400 text-xs font-semibold rounded-full">Mingguan</span>
+                            <span class="text-xs text-slate-400"><i class="fa-regular fa-calendar"></i> Setiap Jumat</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-lg">Kajian Aswaja & Diba'an</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">Pembacaan sholawat berjanji dan pembinaan amaliyah NU di aula sekolah.</p>
                     </div>
 
-                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-lg transition group">
-                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-amber-500 group-hover:text-slate-900 transition"><i class="fa-solid fa-user-gear"></i></div>
-                        <h3 class="font-bold text-slate-900 text-lg mb-2">Pelatihan Kepemimpinan</h3>
-                        <p class="text-slate-600 text-sm">Makesta (Masa Kesetiaan Anggota) sebagai gerbang utama kaderisasi di sekolah.</p>
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="px-3 py-1 bg-amber-100 dark:bg-amber-950 text-amber-600 text-xs font-semibold rounded-full">Bulanan</span>
+                            <span class="text-xs text-slate-400"><i class="fa-regular fa-calendar"></i> Kondisional</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-lg">Makesta (Kaderisasi)</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">Masa Kesetiaan Anggota sebagai gerbang resmi bergabung dalam ikatan pelajar NU.</p>
                     </div>
 
-                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-lg transition group">
-                        <div class="w-12 h-12 bg-emerald-100 text-nuGreen rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-nuGreen group-hover:text-white transition"><i class="fa-solid fa-hands-bound"></i></div>
-                        <h3 class="font-bold text-slate-900 text-lg mb-2">Bantuan Kesiswaan</h3>
-                        <p class="text-slate-600 text-sm">Berpartisipasi aktif menjaga ketertiban upacara, kebersihan lingkungan, dan kegiatan sekolah.</p>
-                    </div>
-
-                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-lg transition group">
-                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-amber-500 group-hover:text-slate-900 transition"><i class="fa-solid fa-calendar-star"></i></div>
-                        <h3 class="font-bold text-slate-900 text-lg mb-2">PHBI (Hari Besar Islam)</h3>
-                        <p class="text-slate-600 text-sm">Panitia pelaksana Maulid Nabi, Isra Miraj, dan Hari Santri Nasional bersama pihak sekolah.</p>
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-950 text-indigo-600 text-xs font-semibold rounded-full">Tahunan</span>
+                            <span class="text-xs text-slate-400"><i class="fa-regular fa-calendar"></i> Hari Besar Islam</span>
+                        </div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-lg">Peringatan PHBI</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm">Panitia pelaksana Maulid Nabi, Isra Miraj, dan Hari Santri Nasional.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="anggota" class="py-16 bg-white">
+        <!-- Direktori Anggota Section -->
+        <section id="anggota" class="py-16 bg-white dark:bg-slate-900 transition-colors">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-8">
-                    <span class="text-nuGreen font-bold text-sm tracking-wider uppercase bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 shadow-sm">Keluarga Besar</span>
-                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mt-3">Direktori Anggota PK IPNU & IPPNU</h2>
+                    <span class="text-nuGreen dark:text-emerald-400 font-bold text-sm tracking-wider uppercase bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800 shadow-sm">Keluarga Besar</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3">Direktori Anggota Kader</h2>
                     <div class="w-20 h-1.5 bg-nuGold mx-auto mt-4 rounded-full"></div>
-                    <p class="text-slate-600 mt-4 text-sm sm:text-base">Daftar resmi seluruh kader dari Kelas X, XI, dan XII SMK NU Kaplongan. Gunakan tombol filter di bawah untuk melihat per kelas.</p>
+                    <p class="text-slate-600 dark:text-slate-400 mt-4 text-sm sm:text-base">Daftar resmi kader aktif dari Kelas X, XI, dan XII SMK NU Kaplongan.</p>
                 </div>
 
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-6 bg-slate-50 p-4 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-6 bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
                     <div class="flex flex-wrap gap-2 w-full md:w-auto justify-center">
                         <button onclick="filterClass('all')" id="tab-all" class="class-tab px-4 py-2 rounded-xl font-bold text-xs sm:text-sm bg-nuGreen text-white shadow transition">Semua Kelas</button>
-                        <button onclick="filterClass('X')" id="tab-X" class="class-tab px-4 py-2 rounded-xl font-semibold text-xs sm:text-sm bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition">Kelas X</button>
-                        <button onclick="filterClass('XI')" id="tab-XI" class="class-tab px-4 py-2 rounded-xl font-semibold text-xs sm:text-sm bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition">Kelas XI</button>
-                        <button onclick="filterClass('XII')" id="tab-XII" class="class-tab px-4 py-2 rounded-xl font-semibold text-xs sm:text-sm bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition">Kelas XII</button>
+                        <button onclick="filterClass('X')" id="tab-X" class="class-tab px-4 py-2 rounded-xl font-semibold text-xs sm:text-sm bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 border border-slate-200 dark:border-slate-700 transition">Kelas X</button>
+                        <button onclick="filterClass('XI')" id="tab-XI" class="class-tab px-4 py-2 rounded-xl font-semibold text-xs sm:text-sm bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 border border-slate-200 dark:border-slate-700 transition">Kelas XI</button>
+                        <button onclick="filterClass('XII')" id="tab-XII" class="class-tab px-4 py-2 rounded-xl font-semibold text-xs sm:text-sm bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 border border-slate-200 dark:border-slate-700 transition">Kelas XII</button>
                     </div>
 
                     <div class="relative w-full md:w-72">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-search"></i></span>
-                        <input type="text" id="search-member" onkeyup="searchMembers()" placeholder="Cari nama atau jurusan..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm" aria-label="Cari anggota">
+                        <input type="text" id="search-member" onkeyup="searchMembers()" placeholder="Cari nama atau jurusan..." class="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white" aria-label="Cari anggota">
                     </div>
                 </div>
 
@@ -377,39 +377,40 @@
 
                 <div id="empty-state" class="hidden text-center py-12">
                     <div class="text-4xl text-slate-300 mb-3"><i class="fa-solid fa-face-frown"></i></div>
-                    <h3 class="text-base font-bold text-slate-700">Anggota tidak ditemukan</h3>
+                    <h3 class="text-base font-bold text-slate-700 dark:text-slate-300">Anggota tidak ditemukan</h3>
                     <p class="text-xs text-slate-500">Coba kata kunci pencarian yang lain.</p>
                 </div>
             </div>
         </section>
 
-        <section id="galeri" class="py-16 bg-slate-100">
+        <!-- Galeri Section -->
+        <section id="galeri" class="py-16 bg-slate-100 dark:bg-slate-950 transition-colors">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-12">
-                    <span class="text-nuGreen font-bold text-sm tracking-wider uppercase bg-white px-3 py-1 rounded-full border border-emerald-200 shadow-sm">Dokumentasi</span>
-                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mt-3">Galeri Kegiatan Sekolah & Organisasi</h2>
+                    <span class="text-nuGreen dark:text-emerald-400 font-bold text-sm tracking-wider uppercase bg-white dark:bg-slate-900 px-3 py-1 rounded-full border border-emerald-200 dark:border-slate-800 shadow-sm">Dokumentasi</span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3">Galeri Kegiatan Sekolah</h2>
                     <div class="w-20 h-1.5 bg-nuGold mx-auto mt-4 rounded-full"></div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="group relative overflow-hidden rounded-2xl shadow-md bg-white aspect-video border border-slate-200">
-                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop" alt="Kegiatan Siswa" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                    <div class="group relative overflow-hidden rounded-2xl shadow-md bg-white dark:bg-slate-900 aspect-video border border-slate-200 dark:border-slate-800 cursor-pointer" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop" alt="Upacara" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
                             <span class="text-nuGold text-xs font-semibold">SMK NU Kaplongan</span>
                             <h4 class="text-white font-bold text-base">Upacara & Kedisiplinan Siswa</h4>
                         </div>
                     </div>
 
-                    <div class="group relative overflow-hidden rounded-2xl shadow-md bg-white aspect-video border border-slate-200">
-                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop" alt="Diskusi Kader" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                    <div class="group relative overflow-hidden rounded-2xl shadow-md bg-white dark:bg-slate-900 aspect-video border border-slate-200 dark:border-slate-800 cursor-pointer" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop" alt="Rapat" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
                             <span class="text-nuGold text-xs font-semibold">Kaderisasi</span>
-                            <h4 class="text-white font-bold text-base">Sidang Pleno & Rapat Koordinasi</h4>
+                            <h4 class="text-white font-bold text-base">Rapat Koordinasi Pengurus</h4>
                         </div>
                     </div>
 
-                    <div class="group relative overflow-hidden rounded-2xl shadow-md bg-white aspect-video border border-slate-200">
-                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop" alt="Kegiatan Keagamaan" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                    <div class="group relative overflow-hidden rounded-2xl shadow-md bg-white dark:bg-slate-900 aspect-video border border-slate-200 dark:border-slate-800 cursor-pointer" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop" alt="Keagamaan" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4">
                             <span class="text-nuGold text-xs font-semibold">Religi & Aswaja</span>
                             <h4 class="text-white font-bold text-base">Peringatan Hari Besar Islam</h4>
@@ -419,13 +420,14 @@
             </div>
         </section>
 
+        <!-- Kontak & Aspirasi Section -->
         <section id="kontak" class="py-16 bg-slate-900 text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                     <div class="lg:col-span-6 space-y-6">
                         <span class="text-nuGold font-bold text-sm tracking-wider uppercase bg-emerald-950 px-3 py-1 rounded-full border border-emerald-800">Hubungi Kami</span>
                         <h2 class="text-2xl sm:text-4xl font-extrabold">Sekretariat PK IPNU & IPPNU SMK NU Kaplongan</h2>
-                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">Punya pertanyaan, usulan program, atau ingin berkoordinasi dengan pengurus? Kunjungi sekretariat kami di lingkungan sekolah atau kirimkan aspirasi melalui formulir di samping.</p>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">Kunjungi sekretariat kami di lingkungan sekolah atau kirimkan aspirasi maupun pertanyaan melalui formulir di samping.</p>
                         <div class="space-y-4 pt-2">
                             <div class="flex items-center gap-4">
                                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-900/60 border border-emerald-700 rounded-xl flex items-center justify-center text-nuGold text-base sm:text-lg shrink-0"><i class="fa-solid fa-location-dot"></i></div>
@@ -434,37 +436,30 @@
                                     <p class="text-xs sm:text-sm text-slate-300">Jl. Raya Kaplongan, Karangampel, Kab. Indramayu, Jawa Barat</p>
                                 </div>
                             </div>
-
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-emerald-900/60 border border-emerald-700 rounded-xl flex items-center justify-center text-nuGold text-base sm:text-lg shrink-0"><i class="fa-solid fa-school"></i></div>
-                                <div>
-                                    <h4 class="font-bold text-white text-sm sm:text-base">Pembina Kesiswaan</h4>
-                                    <p class="text-xs sm:text-sm text-slate-300">Bidang Kesiswaan SMK NU Kaplongan</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
                     <div class="lg:col-span-6">
                         <div class="bg-slate-800 border border-slate-700 p-6 sm:p-10 rounded-3xl shadow-2xl space-y-6">
                             <h3 class="text-xl sm:text-2xl font-bold text-white">Kirim Pesan / Aspirasi</h3>
-                            <p class="text-xs text-slate-400">Pesan akan langsung disampaikan kepada pengurus harian dan guru kesiswaan secara transparan.</p>
-                            <form onsubmit="event.preventDefault(); alert('Terima kasih! Pesan dan aspirasi Anda telah terkirim kepada pengurus PK IPNU-IPPNU dan Kesiswaan SMK NU Kaplongan.'); this.reset();">
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap</label>
-                                    <input type="text" required placeholder="Contoh: Ahmad Fauzan" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-xs sm:text-sm text-white">
+                            <form onsubmit="event.preventDefault(); alert('Terima kasih! Pesan dan aspirasi Anda telah terkirim.'); this.reset();">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap</label>
+                                        <input type="text" required placeholder="Contoh: Ahmad Fauzan" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-xs sm:text-sm text-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-300 mb-1">Kelas / Jabatan</label>
+                                        <input type="text" required placeholder="Contoh: X TJKT 3 / Siswa" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-xs sm:text-sm text-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-300 mb-1">Isi Pesan / Aspirasi</label>
+                                        <textarea rows="4" required placeholder="Tuliskan saran atau pertanyaan di sini..." class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-xs sm:text-sm text-white"></textarea>
+                                    </div>
+                                    <button type="submit" class="w-full bg-nuGold hover:bg-amber-500 text-slate-950 font-bold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2">
+                                        <i class="fa-solid fa-paper-plane"></i> Kirim Aspirasi
+                                    </button>
                                 </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-300 mb-1">Kelas / Jabatan</label>
-                                    <input type="text" required placeholder="Contoh: X TJKT 3 / Siswa" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-xs sm:text-sm text-white">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-300 mb-1">Isi Pesan / Aspirasi</label>
-                                    <textarea rows="4" required placeholder="Tuliskan saran, pertanyaan, atau laporan kegiatan di sini..." class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-xs sm:text-sm text-white"></textarea>
-                                </div>
-                                <button type="submit" class="w-full bg-nuGold hover:bg-amber-500 text-slate-950 font-bold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2">
-                                    <i class="fa-solid fa-paper-plane"></i> Kirim Aspirasi
-                                </button>
                             </form>
                         </div>
                     </div>
@@ -473,48 +468,77 @@
         </section>
     </main>
 
+    <!-- Modal Pendaftaran Kader (NEW FEATURE) -->
+    <div id="registration-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative space-y-6">
+            <button onclick="closeRegistrationModal()" aria-label="Tutup modal" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white">Formulir Pendaftaran Kader</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Bergabunglah bersama PK IPNU & IPPNU SMK NU Kaplongan.</p>
+            </div>
+            <form onsubmit="handleRegistrationSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Nama Lengkap</label>
+                    <input type="text" id="reg-name" required placeholder="Masukkan nama lengkap" class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Pilih Badan</label>
+                    <select id="reg-body" class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white">
+                        <option value="IPNU">IPNU (Ikatan Pelajar Nahdlatul Ulama)</option>
+                        <option value="IPPNU">IPPNU (Ikatan Pelajar Putri Nahdlatul Ulama)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Kelas & Jurusan</label>
+                    <input type="text" id="reg-class" required placeholder="Contoh: X TJKT 3" class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white">
+                </div>
+                <button type="submit" class="w-full bg-nuGreen hover:bg-emerald-800 text-white font-bold py-3 rounded-xl transition shadow">
+                    Kirim Pendaftaran
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer class="bg-nuDarkGreen text-emerald-100 pt-16 pb-10 border-t border-emerald-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                 <div class="space-y-4">
                     <div class="flex items-center gap-3">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/LOGO_IPNU_RESMI_KONGRES_2018.png" alt="IPNU" class="w-9 h-9 object-contain bg-white/95 rounded-full p-0.5">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/LOGO_IPNU_RESMI_KONGRES_2018.png" alt="IPPNU" class="w-8 h-8 object-contain bg-white/95 rounded-full p-0.5">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/LOGO_IPNU_RESMI_KONGRES_2018.png" alt="IPNU" class="w-9 h-9 object-contain bg-white rounded-full p-0.5">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/LOGO_IPNU_RESMI_KONGRES_2018.png" alt="IPPNU" class="w-8 h-8 object-contain bg-white rounded-full p-0.5">
                         <div>
                             <div class="text-white font-bold text-xs sm:text-sm">PK IPNU & IPPNU</div>
                             <div class="text-[11px] text-nuGold">SMK NU Kaplongan</div>
                         </div>
                     </div>
-                    <p class="text-xs text-emerald-300 leading-relaxed">Wadah resmi pengkaderan pelajar Nahdlatul Ulama di SMK NU Kaplongan yang berlandaskan prinsip Belajar, Berjuang, Bertakwa.</p>
+                    <p class="text-xs text-emerald-300 leading-relaxed">Wadah resmi pengkaderan pelajar Nahdlatul Ulama di SMK NU Kaplongan.</p>
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold text-xs sm:text-sm mb-4 border-b border-emerald-800 pb-2 flex items-center gap-2"><i class="fa-solid fa-compass text-nuGold"></i> Tautan Cepat</h4>
+                    <h4 class="text-white font-bold text-xs sm:text-sm mb-4 border-b border-emerald-800 pb-2">Tautan Cepat</h4>
                     <ul class="space-y-2 text-xs">
                         <li><a href="#beranda" class="hover:text-nuGold transition">Beranda Utama</a></li>
                         <li><a href="#sejarah" class="hover:text-nuGold transition">Sejarah & Profil</a></li>
-                        <li><a href="#visi-misi" class="hover:text-nuGold transition">Visi & Misi</a></li>
+                        <li><a href="#struktur" class="hover:text-nuGold transition">Struktur Organisasi</a></li>
                         <li><a href="#kesiswaan" class="hover:text-nuGold transition">Sinergi Kesiswaan</a></li>
-                        <li><a href="#proker" class="hover:text-nuGold transition">Program Kerja</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold text-xs sm:text-sm mb-4 border-b border-emerald-800 pb-2 flex items-center gap-2"><i class="fa-solid fa-users text-nuGold"></i> Direktori Kader</h4>
+                    <h4 class="text-white font-bold text-xs sm:text-sm mb-4 border-b border-emerald-800 pb-2">Direktori Kader</h4>
                     <ul class="space-y-2 text-xs">
                         <li><a href="#anggota" onclick="filterClass('X')" class="hover:text-nuGold transition">Kader Kelas X</a></li>
                         <li><a href="#anggota" onclick="filterClass('XI')" class="hover:text-nuGold transition">Kader Kelas XI</a></li>
                         <li><a href="#anggota" onclick="filterClass('XII')" class="hover:text-nuGold transition">Kader Kelas XII</a></li>
-                        <li><a href="#galeri" class="hover:text-nuGold transition">Galeri Kegiatan</a></li>
-                        <li><a href="#kontak" class="hover:text-nuGold transition">Kirim Aspirasi</a></li>
+                        <li><a href="#agenda" class="hover:text-nuGold transition">Agenda Kegiatan</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="text-white font-bold text-xs sm:text-sm mb-4 border-b border-emerald-800 pb-2 flex items-center gap-2"><i class="fa-solid fa-location-dot text-nuGold"></i> Sekretariat</h4>
+                    <h4 class="text-white font-bold text-xs sm:text-sm mb-4 border-b border-emerald-800 pb-2">Sekretariat</h4>
                     <div class="space-y-2 text-xs text-emerald-300">
                         <p><strong class="text-white">SMK NU Kaplongan</strong><br>Jl. Raya Kaplongan, Karangampel, Indramayu, Jawa Barat</p>
-                        <p><strong class="text-white">Binaan:</strong><br>Bidang Kesiswaan & Guru Pembina</p>
                     </div>
                 </div>
             </div>
@@ -526,7 +550,29 @@
         </div>
     </footer>
 
+    <!-- JavaScript Application Logic -->
     <script>
+        // Dark Mode Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Mobile Menu Logic
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileMenuIcon = document.getElementById('mobile-menu-icon');
@@ -554,10 +600,30 @@
             link.addEventListener('click', closeMobileMenu);
         });
 
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 1024) closeMobileMenu();
-        });
+        // Modal Registration Logic
+        function openRegistrationModal() {
+            document.getElementById('registration-modal').classList.remove('hidden');
+        }
+        function closeRegistrationModal() {
+            document.getElementById('registration-modal').classList.add('hidden');
+        }
+        function handleRegistrationSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value;
+            const body = document.getElementById('reg-body').value;
+            const cls = document.getElementById('reg-class').value;
+            alert(`Terima kasih ${name} (${cls})! Pendaftaran ${body} Anda berhasil diajukan kepada pengurus.`);
+            closeRegistrationModal();
+            e.target.reset();
+        }
 
+        // Lightbox Simple Simulation
+        function openLightbox(el) {
+            const img = el.querySelector('img').src;
+            window.open(img, '_blank');
+        }
+
+        // Members Data & Filtering
         const members = [
             { name: "Muhammad Ridwan Na'ali", classGroup: "X", major: "X TJKT 3" },
             { name: "Mohamad Khoerul Fahmi", classGroup: "X", major: "X TJKT 3" },
@@ -579,7 +645,6 @@
             { name: "Nasril ismail", classGroup: "X", major: "X TKR 5" },
             { name: "Deliyana Sari", classGroup: "X", major: "X TKJ 5" },
             { name: "Rafky ariyasno", classGroup: "X", major: "X TKJ-1" },
-
             { name: "Koriah Safitri", classGroup: "XI", major: "XI TKJ 4" },
             { name: "Fanny Ramadhani", classGroup: "XI", major: "XI MP 1" },
             { name: "Zahro", classGroup: "XI", major: "XI DKV 1" },
@@ -591,7 +656,6 @@
             { name: "Maria Ulfa", classGroup: "XI", major: "XI TKJ 2" },
             { name: "Heri Sufyan", classGroup: "XI", major: "XI TKR 2" },
             { name: "Rohadi", classGroup: "XI", major: "XI TKR 2" },
-
             { name: "Rania", classGroup: "XII", major: "XII MP" },
             { name: "Citra", classGroup: "XII", major: "XII MP" },
             { name: "Nur Hilda", classGroup: "XII", major: "XII DKV" },
@@ -616,14 +680,14 @@
 
             dataToRender.forEach((member, index) => {
                 const card = document.createElement('div');
-                card.className = 'bg-slate-50 border border-slate-200 p-4 sm:p-5 rounded-2xl shadow-sm hover:shadow-md transition flex items-center gap-4 group';
+                card.className = 'bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-4 sm:p-5 rounded-2xl shadow-sm hover:shadow-md transition flex items-center gap-4 group';
 
-                let badgeBg = 'bg-emerald-100 text-nuGreen';
-                if (member.classGroup === 'XI') badgeBg = 'bg-amber-100 text-amber-700';
-                if (member.classGroup === 'XII') badgeBg = 'bg-indigo-100 text-indigo-700';
+                let badgeBg = 'bg-emerald-100 dark:bg-emerald-950 text-nuGreen dark:text-emerald-400';
+                if (member.classGroup === 'XI') badgeBg = 'bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-400';
+                if (member.classGroup === 'XII') badgeBg = 'bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-400';
 
                 card.innerHTML = `
-                    <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white border border-slate-200 text-slate-700 font-bold flex items-center justify-center shrink-0 group-hover:bg-nuGreen group-hover:text-white transition">
+                    <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold flex items-center justify-center shrink-0 group-hover:bg-nuGreen group-hover:text-white transition">
                         <i class="fa-solid fa-user-graduate"></i>
                     </div>
                     <div class="flex-1 min-w-0">
@@ -631,8 +695,8 @@
                             <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full ${badgeBg}">Kelas ${member.classGroup}</span>
                             <span class="text-[11px] text-slate-400">#${index + 1}</span>
                         </div>
-                        <h4 class="font-bold text-slate-900 text-xs sm:text-sm truncate">${member.name}</h4>
-                        <p class="text-[11px] sm:text-xs text-slate-500 font-medium truncate"><i class="fa-solid fa-graduation-cap text-nuGold"></i> ${member.major}</p>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm truncate">${member.name}</h4>
+                        <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium truncate"><i class="fa-solid fa-graduation-cap text-nuGold"></i> ${member.major}</p>
                     </div>
                 `;
                 container.appendChild(card);
@@ -641,7 +705,7 @@
 
         function setActiveTab(group) {
             document.querySelectorAll('.class-tab').forEach(tab => {
-                tab.className = 'class-tab px-4 py-2 rounded-xl font-semibold text-xs sm:text-sm bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition';
+                tab.className = 'class-tab px-4 py-2 rounded-xl font-semibold text-xs sm:text-sm bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 border border-slate-200 dark:border-slate-700 transition';
             });
 
             const activeBtn = document.getElementById(`tab-${group}`) || document.getElementById('tab-all');
